@@ -340,29 +340,29 @@
   Above text copied to /usr/local/google/home/scheib/c/src/content/common/bluetooth/bluetooth_messages.h
 </p>
 
-      <dl title="[NoInterfaceObject] interface BluetoothDiscovery" class="idl" data-merge="BluetoothScanFilter RequestDeviceOptions">
-        <dt>Promise&lt;BluetoothDevice> requestDevice(sequence&lt;BluetoothScanFilter> filters, optional RequestDeviceOptions options)</dt>
-        <dd>
-          When this method is invoked, the UA MUST run the following steps:
-          <ol>
-            <li>Return a new <a>Promise</a>, but continue running these steps asynchronously.</li>
-            <li id="requestDevice-authenticated-environment">
-              If the <a href="http://www.whatwg.org/html/infrastructure.html#javascript-global-environment">global environment</a> is not an
-              <a href="https://w3c.github.io/webappsec/specs/mixedcontent/#authenticated-environment">authenticated environment</a>,
-              reject the <a>Promise</a> with a <a>SecurityError</a> and abort these steps.
-            </li>
-            <li id="requestDevice-user-gesture">
-              If the algorithm is not <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#allowed-to-show-a-popup">allowed to show a popup</a>,
-              reject the <a>Promise</a> with a <a>SecurityError</a> and abort these steps.
-            </li>
-            <li>
-              <a>Scan for devices</a> with
-              the union of all <code>services</code> sequences in <code><var>filters</var></code>
-              as the <var>set of <a>Service</a> UUIDs</var>
-            </li>
-            <li>
-              Remove devices from the result of the scan if
-              they do not <a title="matches a filter">match a filter</a> in <var>filters</var>.
+</>   <dl title="[NoInterfaceObject] interface BluetoothDiscovery" class="idl" data-merge="BluetoothScanFilter RequestDeviceOptions">
+</>     <dt>Promise&lt;BluetoothDevice> requestDevice(sequence&lt;BluetoothScanFilter> filters, optional RequestDeviceOptions options)</dt>
+</>     <dd>
+</>       When this method is invoked, the UA MUST run the following steps:
+</>       <ol>
+</>         <li>Return a new <a>Promise</a>, but continue running these steps asynchronously.</li>
+</>         <li id="requestDevice-authenticated-environment">
+</>           If the <a href="http://www.whatwg.org/html/infrastructure.html#javascript-global-environment">global environment</a> is not an
+</>           <a href="https://w3c.github.io/webappsec/specs/mixedcontent/#authenticated-environment">authenticated environment</a>,
+</>           reject the <a>Promise</a> with a <a>SecurityError</a> and abort these steps.
+</>         </li>
+</>         <li id="requestDevice-user-gesture">
+</>           If the algorithm is not <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#allowed-to-show-a-popup">allowed to show a popup</a>,
+</>           reject the <a>Promise</a> with a <a>SecurityError</a> and abort these steps.
+</>         </li>
+</>         <li>
+</>           <a>Scan for devices</a> with
+</>           the union of all <code>services</code> sequences in <code><var>filters</var></code>
+</>           as the <var>set of <a>Service</a> UUIDs</var>
+</>         </li>
+</>         <li>
+</>           Remove devices from the result of the scan if
+</>           they do not <a title="matches a filter">match a filter</a> in <var>filters</var>.
 </>         <li>
 </>           Display a prompt to the user requesting that the user specify some devices from the result of the scan.
 </>           The UA SHOULD show the user the human-readable name of each device.
@@ -392,10 +392,13 @@
 </>         </li>
 </>       </ol>
 <p class="chrome note">
-  Above text copied to /usr/local/google/home/scheib/c/src/content/common/bluetooth/bluetooth_messages.h
+  Above text "Display a prompt ... Resolve the Promise ..." copied to /usr/local/google/home/scheib/c/src/content/common/bluetooth/bluetooth_messages.h
 </p>
-        </dd>
-      </dl>
+</>    </dd>
+</>  </dl>
+<p class="chrome note">
+  third_party/WebKit/Source/modules/bluetooth/BluetoothDiscovery.idl
+</p>
 
       <dl title="dictionary BluetoothScanFilter" class="idl">
         <dt>sequence&lt;BluetoothServiceUuid> services</dt>
@@ -562,100 +565,103 @@
         <h2><a>BluetoothDevice</a></h2>
 
         <p>Represents a known Bluetooth device.
-        <dl title="interface BluetoothDevice : ServiceEventHandlers" class="idl" data-merge="VendorIdSource">
-          <dt>readonly attribute DOMString instanceId</dt>
-          <dd>
-            Returns the opaque identifier assigned to this device.
-            This identifier MUST uniquely identify a device to the extent that
-            the UA can determine that two Bluetooth connections are to the same device.
-            For example, a paired device MUST keep the same <code>instanceId</code>
-            across a change to its <a>Resolvable Private Address</a>.
-            On the other hand, a device using <a>Non-Resolvable Private Address</a>es
-            might not keep the same <code>instanceId</code>.
-            The UA MAY use different identifiers for the same device on two different origins.
-            The UA MAY create a new identifier for a known device on an origin
-            if the user revokes and re-grants access to that device.
-            The UA MAY re-use identifiers for existing devices on an origin
-            if the user clears the origin's data.
-          </dd>
-
-          <dt>readonly attribute DOMString? name</dt>
-          <dd>The human-readable name of the device.</dd>
-
-          <dt>readonly attribute long? deviceClass</dt>
-          <dd>The class of the device, a bit-field defined by [[!BLUETOOTH-ASSIGNED-BASEBAND]].</dd>
-
-          <dt>readonly attribute VendorIdSource? vendorIdSource</dt>
-          <dd>The Vendor ID Source field
-          in the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a> characteristic
-          in the <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a> service.</dd>
-          <dt>readonly attribute long? vendorId</dt>
-          <dd>The 16-bit Vendor ID field
-          in the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a> characteristic
-          in the <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a> service.</dd>
-          <dt>readonly attribute long? productId</dt>
-          <dd>The 16-bit Product ID field
-          in the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a> characteristic
-          in the <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a> service.</dd>
-          <dt>readonly attribute long? productVersion</dt>
-          <dd>
-            The 16-bit Product Version field in the
-            <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a>
-            characteristic in the
-            <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a>
-            service.
-          </dd>
-
-          <dt>readonly attribute boolean? paired</dt>
-          <dd>Indicates whether or not the device is paired with the system.</dd>
-
-          <dt>readonly attribute boolean? connected</dt>
-          <dd>Indicates whether the device is currently connected to the system.</dd>
-
-          <dt>readonly attribute sequence&lt;UUID>? uuids</dt>
-          <dd>
-            UUIDs of protocols, profiles and services advertised by the device.
-            For Low Energy devices, this list is obtained from AD and GATT primary services.
-          </dd>
-
-          <dt>Promise&lt;void> connect()</dt>
-          <dd>
-            Establishes a connection to the device.
-          </dd>
-
-          <dt>Promise&lt;void> disconnect()</dt>
-          <dd>
-            Closes the site's connection to the device.
-            Note that this will not always destroy the physical link itself,
-            since there may be other sites with open connections.
-          </dd>
-
-          <dt>Promise&lt;BluetoothGATTService> getPrimaryService(BluetoothServiceUuid service)</dt>
-          <dd>
-            Returns a promise that is asynchronously resolved with
-            the <a href="#bluetooth-tree">first</a> primary GATT service on the remote device
-            whose UUID is <var>service</var> and
-            whose UUID is in the <a>allowed services list</a> for this device and origin.
-            If there is no such service, resolves the promise with <code>null</code>.
-          </dd>
-
-          <dt>Promise&lt;sequence&lt;BluetoothGATTService>> getPrimaryServices()</dt>
-          <dd>
-            Returns a promise that is asynchronously resolved with
-            a sequence of all the primary GATT services on the remote device
-            whose UUIDs are in the <a>allowed services list</a> for this device and origin.
-          </dd>
-
-          <dt>Promise&lt;sequence&lt;BluetoothGATTService>> getPrimaryServices(BluetoothServiceUuid service)</dt>
-          <dd>Returns <code>this.getPrimaryServices([service])</code></dd>
-
-          <dt>Promise&lt;sequence&lt;BluetoothGATTService>> getPrimaryServices(sequence&lt;BluetoothServiceUuid> services)</dt>
-          <dd>
-            Returns a promise that is asynchronously resolved with
-            a sequence of all the primary GATT services on the remote device with UUIDs in
-            both <var>services</var> and the <a>allowed services list</a> for this device and origin.
-          </dd>
-        </dl>
+</>     <dl title="interface BluetoothDevice : ServiceEventHandlers" class="idl" data-merge="VendorIdSource">
+</>       <dt>readonly attribute DOMString instanceId</dt>
+</>       <dd>
+</>         Returns the opaque identifier assigned to this device.
+</>         This identifier MUST uniquely identify a device to the extent that
+</>         the UA can determine that two Bluetooth connections are to the same device.
+</>         For example, a paired device MUST keep the same <code>instanceId</code>
+</>         across a change to its <a>Resolvable Private Address</a>.
+</>         On the other hand, a device using <a>Non-Resolvable Private Address</a>es
+</>         might not keep the same <code>instanceId</code>.
+</>         The UA MAY use different identifiers for the same device on two different origins.
+</>         The UA MAY create a new identifier for a known device on an origin
+</>         if the user revokes and re-grants access to that device.
+</>         The UA MAY re-use identifiers for existing devices on an origin
+</>         if the user clears the origin's data.
+</>       </dd>
+</>
+</>       <dt>readonly attribute DOMString? name</dt>
+</>       <dd>The human-readable name of the device.</dd>
+</>
+</>       <dt>readonly attribute long? deviceClass</dt>
+</>       <dd>The class of the device, a bit-field defined by [[!BLUETOOTH-ASSIGNED-BASEBAND]].</dd>
+</>
+</>       <dt>readonly attribute VendorIdSource? vendorIdSource</dt>
+</>       <dd>The Vendor ID Source field
+</>       in the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a> characteristic
+</>       in the <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a> service.</dd>
+</>       <dt>readonly attribute long? vendorId</dt>
+</>       <dd>The 16-bit Vendor ID field
+</>       in the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a> characteristic
+</>       in the <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a> service.</dd>
+</>       <dt>readonly attribute long? productId</dt>
+</>       <dd>The 16-bit Product ID field
+</>       in the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a> characteristic
+</>       in the <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a> service.</dd>
+</>       <dt>readonly attribute long? productVersion</dt>
+</>       <dd>
+</>         The 16-bit Product Version field in the
+</>         <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml">pnp_id</a>
+</>         characteristic in the
+</>         <a href="https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.device_information.xml">device_information</a>
+</>         service.
+</>       </dd>
+</>
+</>       <dt>readonly attribute boolean? paired</dt>
+</>       <dd>Indicates whether or not the device is paired with the system.</dd>
+</>
+</>       <dt>readonly attribute boolean? connected</dt>
+</>       <dd>Indicates whether the device is currently connected to the system.</dd>
+</>
+</>       <dt>readonly attribute sequence&lt;UUID>? uuids</dt>
+</>       <dd>
+</>         UUIDs of protocols, profiles and services advertised by the device.
+</>         For Low Energy devices, this list is obtained from AD and GATT primary services.
+</>       </dd>
+</>
+</>       <dt>Promise&lt;void> connect()</dt>
+</>       <dd>
+</>         Establishes a connection to the device.
+</>       </dd>
+</>
+</>       <dt>Promise&lt;void> disconnect()</dt>
+</>       <dd>
+</>         Closes the site's connection to the device.
+</>         Note that this will not always destroy the physical link itself,
+</>         since there may be other sites with open connections.
+</>       </dd>
+</>
+</>       <dt>Promise&lt;BluetoothGATTService> getPrimaryService(BluetoothServiceUuid service)</dt>
+</>       <dd>
+</>         Returns a promise that is asynchronously resolved with
+</>         the <a href="#bluetooth-tree">first</a> primary GATT service on the remote device
+</>         whose UUID is <var>service</var> and
+</>         whose UUID is in the <a>allowed services list</a> for this device and origin.
+</>         If there is no such service, resolves the promise with <code>null</code>.
+</>       </dd>
+</>
+</>       <dt>Promise&lt;sequence&lt;BluetoothGATTService>> getPrimaryServices()</dt>
+</>       <dd>
+</>         Returns a promise that is asynchronously resolved with
+</>         a sequence of all the primary GATT services on the remote device
+</>         whose UUIDs are in the <a>allowed services list</a> for this device and origin.
+</>       </dd>
+</>
+</>       <dt>Promise&lt;sequence&lt;BluetoothGATTService>> getPrimaryServices(BluetoothServiceUuid service)</dt>
+</>       <dd>Returns <code>this.getPrimaryServices([service])</code></dd>
+</>
+</>       <dt>Promise&lt;sequence&lt;BluetoothGATTService>> getPrimaryServices(sequence&lt;BluetoothServiceUuid> services)</dt>
+</>       <dd>
+</>         Returns a promise that is asynchronously resolved with
+</>         a sequence of all the primary GATT services on the remote device with UUIDs in
+</>         both <var>services</var> and the <a>allowed services list</a> for this device and origin.
+</>       </dd>
+</>     </dl>
+<p class="chrome note">
+  third_party/WebKit/Source/modules/bluetooth/BluetoothDevice.idl
+</p>
 
         <p>Allocation authorities for Vendor IDs.</p>
         <dl title="enum VendorIdSource" class="idl">
@@ -1870,15 +1876,21 @@
 
       <div title="Navigator implements NavigatorBluetooth" class="idl"></div>
 
-      <dl title="[NoInterfaceObject] interface NavigatorBluetooth" class="idl">
-        <dt>readonly attribute Bluetooth bluetooth</dt>
-        <dl>Provides access to Bluetooth APIs.</dl>
-      </dl>
+</>   <dl title="[NoInterfaceObject] interface NavigatorBluetooth" class="idl">
+</>     <dt>readonly attribute Bluetooth bluetooth</dt>
+</>     <dl>Provides access to Bluetooth APIs.</dl>
+</>   </dl>
+<p class="chrome note">
+  third_party/WebKit/Source/modules/bluetooth/NavigatorBluetooth.idl
+</p>
 
-      <dl title="[NoInterfaceObject] interface Bluetooth" class="idl">
-      </dl>
-      <div title="Bluetooth implements BluetoothDiscovery" class="idl"></div>
-      <div title="Bluetooth implements BluetoothInteraction" class="idl"></div>
+</>   <dl title="[NoInterfaceObject] interface Bluetooth" class="idl">
+</>   </dl>
+</>   <div title="Bluetooth implements BluetoothDiscovery" class="idl"></div>
+</>   <div title="Bluetooth implements BluetoothInteraction" class="idl"></div>
+<p class="chrome note">
+  third_party/WebKit/Source/modules/bluetooth/Bluetooth.idl
+</p>
     </section>
 
   </body>
