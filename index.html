@@ -3,6 +3,16 @@
   <head>
     <title>Web Bluetooth</title>
     <meta charset='utf-8'>
+    <style>
+      /* Style used to annotate Chrome Implementation notes.
+         Use <p class="chrome note"> */
+      p.chrome:before {
+        content: "Chrome Implementation";
+        display: block; /* Seperate to a new line */
+        padding-bottom: 1em;
+        color: #2b2; /* Copied from respec div.note-title */
+      }
+    </style>
     <script src='https://www.w3.org/Tools/respec/respec-w3c-common'
             async class='remove'></script>
     <script class='remove'>
@@ -168,17 +178,20 @@
       <section>
         <h2>Device access is powerful</h2>
 
-        <p>
-          When a website requests access to devices using
-          <code><a href="#widl-BluetoothDiscovery-requestDevice-Promise-BluetoothDevice--sequence-BluetoothScanFilter--filters">requestDevice</a></code>,
-          it gets the ability to access all GATT services mentioned in the call.
-          The UA MUST inform the user what capabilities these services give the website
-          before asking which devices to entrust to it.
-          If any services in the list aren't known to the UA,
-          the UA MUST assume they give the site complete control over the device
-          and inform the user of this risk.
-          The UA MUST also allow the user to inspect what sites have access to what devices
-          and revoke these pairings.
+</>     <p>
+</>       When a website requests access to devices using
+</>       <code><a href="#widl-BluetoothDiscovery-requestDevice-Promise-BluetoothDevice--sequence-BluetoothScanFilter--filters">requestDevice</a></code>,
+</>       it gets the ability to access all GATT services mentioned in the call.
+</>       The UA MUST inform the user what capabilities these services give the website
+</>       before asking which devices to entrust to it.
+</>       If any services in the list aren't known to the UA,
+</>       the UA MUST assume they give the site complete control over the device
+</>       and inform the user of this risk.
+</>       The UA MUST also allow the user to inspect what sites have access to what devices
+</>       and revoke these pairings.
+<p class="chrome note">
+  Above text copied to /usr/local/google/home/scheib/c/src/content/common/bluetooth/bluetooth_messages.h
+</p>
 
         <p>
           The UA MUST NOT allow the user to pair entire classes of devices with a website.
@@ -308,21 +321,24 @@
     <section>
       <h2>Device Discovery</h2>
 
-      <p>
-        The UA MUST maintain an <dfn>allowed devices list</dfn> for each origin,
-        storing a set of Bluetooth devices the origin is allowed to access.
-        For each device in the <a>allowed devices list</a> for an origin,
-        the UA MUST maintain an <dfn>allowed services list</dfn> consisting of
-        UUIDs for GATT Primary <a>Service</a>s the origin is allowed to access on the device.
-        The UA MAY remove devices from the <a>allowed devices list</a> at any time
-        based on signals from the user.
-        For example, if the user chooses not to remember access,
-        the UA might remove a device when the tab that was granted access to it is closed.
-        Or the UA might provide a revocation UI that allows the user
-        to explicitly remove a device even while a tab is actively using that device.
-        If a device is removed from this list while
-        a <a>Promise</a> is pending to do something with the device,
-        it MUST be treated the same as if the device moved out of Bluetooth range.
+</>   <p>
+</>     The UA MUST maintain an <dfn>allowed devices list</dfn> for each origin,
+</>     storing a set of Bluetooth devices the origin is allowed to access.
+</>     For each device in the <a>allowed devices list</a> for an origin,
+</>     the UA MUST maintain an <dfn>allowed services list</dfn> consisting of
+</>     UUIDs for GATT Primary <a>Service</a>s the origin is allowed to access on the device.
+</>     The UA MAY remove devices from the <a>allowed devices list</a> at any time
+</>     based on signals from the user.
+</>     For example, if the user chooses not to remember access,
+</>     the UA might remove a device when the tab that was granted access to it is closed.
+</>     Or the UA might provide a revocation UI that allows the user
+</>     to explicitly remove a device even while a tab is actively using that device.
+</>     If a device is removed from this list while
+</>     a <a>Promise</a> is pending to do something with the device,
+</>     it MUST be treated the same as if the device moved out of Bluetooth range.
+<p class="chrome note">
+  Above text copied to /usr/local/google/home/scheib/c/src/content/common/bluetooth/bluetooth_messages.h
+</p>
 
       <dl title="[NoInterfaceObject] interface BluetoothDiscovery" class="idl" data-merge="BluetoothScanFilter RequestDeviceOptions">
         <dt>Promise&lt;BluetoothDevice> requestDevice(sequence&lt;BluetoothScanFilter> filters, optional RequestDeviceOptions options)</dt>
@@ -347,34 +363,37 @@
             <li>
               Remove devices from the result of the scan if
               they do not <a title="matches a filter">match a filter</a> in <var>filters</var>.
-            <li>
-              Display a prompt to the user requesting that the user specify some devices from the result of the scan.
-              The UA SHOULD show the user the human-readable name of each device.
-              If this name is not available because the UA's Bluetooth system doesn't support privacy-enabled scans,
-              the UA SHOULD allow the user to indicate interest and then perform a privacy-disabled scan to retrieve the name.
-              <p>
-              The UA MAY allow the user to select a nearby device that does not match <var>filters</var>.
-            </li>
-            <li>
-              Wait for the user to have made their selection.
-            </li>
-            <li>
-              If the user cancels the prompt, reject the Promise with a <a>NotFoundError</a> and abort these steps.
-            </li>
-            <li>
-              Record the selected device in the origin's <a>allowed devices list</a>
-              and the union of the service UUIDs from <code>filters</code>
-              and <code>options.optionalServices</code>
-              in the device and origin's <a>allowed services list</a>.
-            </li>
-            <li>
-              Connect to the device. ([[BLUETOOTH41]] 3.G.6.2.1)
-              If the connection fails, reject the Promise with a <a>NetworkError</a> and abort these steps.
-            </li>
-            <li>
-              Resolve the <a>Promise</a> with a <a>BluetoothDevice</a> instance representing the selected device.
-            </li>
-          </ol>
+</>         <li>
+</>           Display a prompt to the user requesting that the user specify some devices from the result of the scan.
+</>           The UA SHOULD show the user the human-readable name of each device.
+</>           If this name is not available because the UA's Bluetooth system doesn't support privacy-enabled scans,
+</>           the UA SHOULD allow the user to indicate interest and then perform a privacy-disabled scan to retrieve the name.
+</>           <p>
+</>           The UA MAY allow the user to select a nearby device that does not match <var>filters</var>.
+</>         </li>
+</>         <li>
+</>           Wait for the user to have made their selection.
+</>         </li>
+</>         <li>
+</>           If the user cancels the prompt, reject the Promise with a <a>NotFoundError</a> and abort these steps.
+</>         </li>
+</>         <li>
+</>           Record the selected device in the origin's <a>allowed devices list</a>
+</>           and the union of the service UUIDs from <code>filters</code>
+</>           and <code>options.optionalServices</code>
+</>           in the device and origin's <a>allowed services list</a>.
+</>         </li>
+</>         <li>
+</>           Connect to the device. ([[BLUETOOTH41]] 3.G.6.2.1)
+</>           If the connection fails, reject the Promise with a <a>NetworkError</a> and abort these steps.
+</>         </li>
+</>         <li>
+</>           Resolve the <a>Promise</a> with a <a>BluetoothDevice</a> instance representing the selected device.
+</>         </li>
+</>       </ol>
+<p class="chrome note">
+  Above text copied to /usr/local/google/home/scheib/c/src/content/common/bluetooth/bluetooth_messages.h
+</p>
         </dd>
       </dl>
 
