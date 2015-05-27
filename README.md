@@ -8,4 +8,3 @@ Documents in this repository
 ----------------------------
 
 * [Specification](https://webbluetoothchrome.github.io/web-bluetooth/)
-
