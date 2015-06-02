@@ -1711,6 +1711,11 @@ return navigator.bluetooth.requestDevice({
             returns <code>null</code> if its argument is empty
             or returns the first (only) element of its argument.
           </li>
+          <p class="chrome note">
+            Step 3 is implemented in BluetoothDispatcher::OnGetCharacteristicError.
+            If BluetoothDispatcherHost returns a NotFound error BluetoothDispatcher::OnGetCharacteristicError
+            will resolve the promise with <code>null</code>.
+          </p>
         </ol>
 
         <p>
