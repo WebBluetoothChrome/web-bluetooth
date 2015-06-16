@@ -439,6 +439,11 @@
           included in <code><var>filter</var>.services</code> as a primary (vs included) service.
         </li>
       </ul>
+      <p class="chrome note">
+        The <a>matches a filter</a> algorithm is implemented in
+        <a href="https://code.google.com/p/chromium/codesearch/#chromium/src/content/browser/bluetooth/bluetooth_dispatcher_host.cc&sq=package:chromium&q=MatchesFilter"
+           ><code>bluetooth_dispatcher_host.cc:MatchesFilter()</code></a>.
+      </p>
 
       <p class="note">
         The list of Service UUIDs that a device advertises
@@ -473,6 +478,11 @@
             Remove devices from <var>scanResult</var> if
             they do not <a title="matches a filter">match a filter</a>
             in <code><var>filters</var></code>.
+            <p class="chrome note">
+              This step is implemented in
+              <a href="https://code.google.com/p/chromium/codesearch/#chromium/src/content/browser/bluetooth/bluetooth_dispatcher_host.cc&sq=package:chromium&q=BluetoothDispatcherHost::OnDiscoverySessionStopped"
+                 ><code>BluetoothDispatcherHost::OnDiscoverySessionStopped</code></a>.
+            </p>
           </li>
           <li>
             Even if <var>scanResult</var> is empty,
