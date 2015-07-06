@@ -2758,7 +2758,12 @@ return navigator.bluetooth.requestDevice({
           For example, <code>canonicalUUID(0xDEADBEEF)</code> returns
           <code>"deadbeef-0000-1000-8000-00805f9b34fb"</code>.
         </p>
-
+        <p class="chrome note">
+          The <a>BluetoothUUID.canonicalUUID</a> algorithm is implemented in
+          <a href="https://code.google.com/p/chromium/codesearch/#chromium/src/third_party/WebKit/Source/modules/bluetooth/BluetoothUUID.cpp&q=canonicalUUID">
+            <code>BluetoothUUID.cpp</code>
+          </a>
+        </p>
         <p class="note">
           <dfn>BluetoothServiceUUID</dfn> represents
           16- and 32-bit UUID aliases, <a>valid UUID</a>s,
@@ -2789,6 +2794,12 @@ return navigator.bluetooth.requestDevice({
             Otherwise, throw a <a>SyntaxError</a>.
           </li>
         </ol>
+        <p class="chrome note">
+          The <a>BluetoothUUID.getService</a> algorithm is implemented in
+          <a href="https://code.google.com/p/chromium/codesearch/#chromium/src/third_party/WebKit/Source/modules/bluetooth/BluetoothUUID.cpp&q=getUUIDForGATTAttribute">
+            <code>BluetoothUUID.cpp</code>
+          </a>
+        </p>
         <aside class="example">
           <p>
             <code><a>BluetoothUUID.getService</a>("<a
@@ -2836,6 +2847,12 @@ return navigator.bluetooth.requestDevice({
             Otherwise, throw a <a>SyntaxError</a>.
           </li>
         </ol>
+        <p class="chrome note">
+          The <a>BluetoothUUID.getCharacteristic</a> algorithm is implemented in
+          <a href="https://code.google.com/p/chromium/codesearch/#chromium/src/third_party/WebKit/Source/modules/bluetooth/BluetoothUUID.cpp&q=getUUIDForGATTAttribute">
+            <code>BluetoothUUID.cpp</code>
+          </a>
+        </p>
         <aside class="example">
           <p>
             <code><a>BluetoothUUID.getCharacteristic</a>("<a
@@ -2875,6 +2892,12 @@ return navigator.bluetooth.requestDevice({
             Otherwise, throw a <a>SyntaxError</a>.
           </li>
         </ol>
+        <p class="chrome note">
+          The <a>BluetoothUUID.getDescriptor</a> algorithm is implemented in
+          <a href="https://code.google.com/p/chromium/codesearch/#chromium/src/third_party/WebKit/Source/modules/bluetooth/BluetoothUUID.cpp&q=getUUIDForGATTAttribute">
+            <code>BluetoothUUID.cpp</code>
+          </a>
+        </p>
         <aside class="example">
           <p>
             <code><a>BluetoothUUID.getDescriptor</a>("<a
