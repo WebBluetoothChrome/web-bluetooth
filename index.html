@@ -2013,6 +2013,15 @@ return navigator.bluetooth.requestDevice({
           </li>
         </ol>
 
+        <p class="chrome note">
+          Step 3 of the writeValue algorithm is implemented twice:
+          <a href="https://code.google.com/p/chromium/codesearch#chromium/src/content/browser/bluetooth/bluetooth_dispatcher_host.h&q=OnWriteValue">
+            on the browser-side
+          </a> and
+          <a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/modules/bluetooth/BluetoothGATTCharacteristic.cpp&q=writeValue">
+            on the blink-side
+          </a>.
+        </p>
         <p>
           For each known GATT <a>Characteristic</a>, the UA MUST maintain
           an <dfn>active notification context set</dfn> of <a>Bluetooth</a> objects.
