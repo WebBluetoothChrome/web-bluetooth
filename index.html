@@ -2014,10 +2014,12 @@ return navigator.bluetooth.requestDevice({
         </ol>
 
         <p class="chrome note">
-          Step 3 of the writeValue algorithm is implemented twice:
+          Step 3 of the writeValue algorithm
           <a href="https://code.google.com/p/chromium/codesearch#chromium/src/content/browser/bluetooth/bluetooth_dispatcher_host.h&q=OnWriteValue">
-            on the browser-side
-          </a> and
+            on the browser-side.
+          </a>.
+          <br>
+          Step 2 and 3 of the writeValue algorithm
           <a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/modules/bluetooth/BluetoothGATTCharacteristic.cpp&q=writeValue">
             on the blink-side
           </a>.
