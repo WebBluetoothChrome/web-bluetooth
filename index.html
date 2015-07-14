@@ -463,6 +463,11 @@
           <li id="requestDevice-secure-context">
             If the <a>incumbent settings object</a> is not a <a>sufficiently secure context</a>,
             <a>reject</a> <var>promise</var> with a <a>SecurityError</a> and abort these steps.
+            <p class="chrome note">
+              This step is implemented in in
+              <a href="https://code.google.com/p/chromium/codesearch/#search/&sq=package:chromium&q=function:%5CbBluetooth::requestDevice%20file:.cpp$"
+                 ><code>Bluetooth::requestDevice</code></a>.
+            </p>
           </li>
           <li id="requestDevice-user-gesture">
             If the algorithm is not <a>allowed to show a popup</a>,
